@@ -35,5 +35,18 @@ urlpatterns = [
     path('tag/<str:tag>/', views.TaggedObjectLV.as_view(), name='tagged_object_list'),
     
     #blog/search/
-    path('search/', views.SearchFormView.as_view(), name='search')
+    path('search/', views.SearchFormView.as_view(), name='search'),
+    
+    #blog/add/
+    path('add/', views.PostCreateView.as_view(), name='add',),
+    
+    #/blog/change
+    path('change/', views.PostChangeLV.as_view(), name="change",),
+    
+    #blog/99/update/
+    path('update/', views.PostUpdateView.as_view(), name="update",),
+    
+    #/blog/99/delete/
+    path('delete/', views.PostDeleteView.as_view(), name='delete',),
+    
 ]
