@@ -6,7 +6,7 @@
 {% block content %}
 
     <h1>Please Login</h1>
-    <p class="font-italic">Pleae enter your id an password.</p>
+    <p class="font-italic">Pleae enter your ID and password.</p>
 
     {% if form.errors %}
     <div class="alert alert-danger">
@@ -23,13 +23,14 @@
             {{ form.username|add_class:"form-control"|attr:"autofocus" }}
         </div>
     </div>
+    
     <div class="form-group row">
         {{ form.password|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
         <div class="col-sm-5">
             {{ form.password|add_class:"form-control"}}
         </div>
     </div>
-    u
+    
     <div class="form-group">
         <div class="offet-sm-2 col-sm-5">
             <input type="submit" value="log in" class="btn btn-info"/>

@@ -44,9 +44,9 @@ urlpatterns = [
     path('change/', views.PostChangeLV.as_view(), name="change",),
     
     #blog/99/update/
-    path('update/', views.PostUpdateView.as_view(), name="update",),
+    path('<int:pk>/update/', views.PostUpdateView.as_view(), name="update",),
     
     #/blog/99/delete/
-    path('delete/', views.PostDeleteView.as_view(), name='delete',),
+    path('<int:pk>/delete/', views.PostDeleteView.as_view(), name='delete',),
     
 ]
