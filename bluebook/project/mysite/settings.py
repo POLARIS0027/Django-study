@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f%u@+g846dp&p2($w2dkk2xt754cgwvr(n5k@c7o+#_$s1%_&%'
+SECRET_KEY = "django-insecure-f%u@+g846dp&p2($w2dkk2xt754cgwvr(n5k@c7o+#_$s1%_&%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.ap-northeast-2.compute.amazonaws.com' ]
+ALLOWED_HOSTS = [ '127.0.0.1', 'localhost', '.elasticbeanstalk.com', ]
 
 
 # Application definition!!!
@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'taggit_templatetags2',
     'photo.apps.PhotoConfig',
     'widget_tweaks',
+    'sorl.thumbnail',
+    'storages',
+    
     
     
 ]
@@ -84,8 +87,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "test",
+        'USER': "pola2272",
+        'PASSWORD': "sjw754122",
+        'HOST': 'django-mysql-8027.cdarq1kfqchi.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -142,3 +152,14 @@ DISQUS_MY_DOMAIN = 'http://127.0.0.1:8000'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_STORAGE = 'mysite.storage.S3StaticStorage'
+DEFAULT_FILE_STORGE = 'mysite.storage.S3MediaStorage'
+
+AWS_ACCESS_KEY_ID = "AKIAWU53XVV6PLE2LTH7"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+AWS_STORAGE_BUCKET_NAME = 'myizbucket'
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 

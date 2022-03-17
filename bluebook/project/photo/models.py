@@ -1,11 +1,12 @@
 from django.db import models
 from django.urls import reverse
-from photo.fields import ThumbnailImageField
+
 # Create your models here.
 
 class Album(models.Model):
     name = models.CharField(max_length=30)
     description =models.CharField('One line Description', max_length=100, blank=True)
+    owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='OWNER', blank=True, null=True)
     
     class Meta:
         ordering=('name',)
@@ -20,8 +21,9 @@ class Photo(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     title = models.CharField('TITLE', max_length=30)
     description = models.TextField('Photo Description', blank=True)
-    image = ThumbnailImageField(upload_to='photo/%Y/%m')
+    image = models.ImageField('IMAGE', upload_to='SorlPhoto/%Y')
     upload_dt = models.DateTimeField('Upload Date', auto_now_add=True)
+    owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, verbose_name='OWNER', blank=True, null=True )
     
     class Meta:
         ordering = ('title',)
